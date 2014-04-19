@@ -50,7 +50,6 @@ class Dir::Detective
       end
     end
   
-    result = {}
     if size.to_i > size_least
       return Dir::Detective::Result.new(path, size)
     end
