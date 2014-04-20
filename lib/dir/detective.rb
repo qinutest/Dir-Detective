@@ -33,14 +33,10 @@ class Dir::Detective
   def get_size(path, size_least)
     if (File.directory?(path))
       o, e, s = Open3.capture3('du -s ' + path)
-      begin
-        o.match(/^(.+?)\t/) {|m|
-          if m
-            size = m[1]
-          end
-        }
-      rescue
-
+      o.encode('UTF-8', :invalid => :replace, :replace => '?').match(/^(.+?)\t/) do |m|
+        if m
+          size = m[1]
+        end
       end
     else
       begin
