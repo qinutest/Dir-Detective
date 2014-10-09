@@ -23,8 +23,12 @@ class Dir::Detective
       )
         yield(path_start + '/' + each)
 
-        if (File.directory?(path_start + '/' + each))
-          process(path_start + '/' + each, &block)
+        begin
+          if (File.directory?(path_start + '/' + each))
+            process(path_start + '/' + each, &block)
+          end
+        rescue
+
         end
       end
     end
